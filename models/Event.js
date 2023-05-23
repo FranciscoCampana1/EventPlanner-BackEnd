@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     
     static associate(models) {
-      
+
       Event.belongsToMany(models.User, {
         through: "users_events",
         foreignKey: "user_id"
@@ -14,10 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Event.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    date: DataTypes.DATEONLY,
-    time: DataTypes.TIME
+    title:{
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    time: {
+      tpe: DataTypes.TIME,
+      allowNull: false
+    },
+    id_admin:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+    }
   }, {
     sequelize,
     modelName: 'Event',
