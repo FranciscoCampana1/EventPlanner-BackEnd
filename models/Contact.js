@@ -6,14 +6,25 @@ module.exports = (sequelize, DataTypes) => {
   class Contact extends Model {
     
     static associate(models) {
-      // define association here
+
+      Contact.belongsTo(models.User, {
+        foreignKey:"user_id"
+      })
     }
   }
+
   Contact.init({
-    name: DataTypes.STRING,
-    surname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phone: DataTypes.INTEGER
+    phone:{
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 8,
+        max:15,
+        unique: true
+      }
+    },
+    user_id:{
+      type: DataTypes.INTEGER,
+    }
   }, {
     sequelize,
     modelName: 'Contact',
