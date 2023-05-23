@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+
   Role.init({
     user_role: DataTypes.STRING
   }, {
