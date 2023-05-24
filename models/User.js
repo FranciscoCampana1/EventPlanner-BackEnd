@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         through: "users_events",
         foreignKey: "user_id"
       })
+
+      User.hasMany(models.Event, {
+        foreignKey: "id"
+      })
     }
   }
   User.init(
@@ -53,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
       role_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+       
       },
     },
     {

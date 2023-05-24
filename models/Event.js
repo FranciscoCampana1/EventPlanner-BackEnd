@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         through: "users_events",
         foreignKey: "user_id"
       })
+
+      Event.belongsTo(models.User, {
+        foreignKey: "id"
+      })
     }
   }
   Event.init({
@@ -26,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     time: {
-      tpe: DataTypes.TIME,
+      type: DataTypes.TIME,
       allowNull: false
     },
     id_admin:{
