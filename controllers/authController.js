@@ -29,10 +29,10 @@ authController.register = async (req, res) => {
     });
 
     return sendSuccsessResponse(res, 200, {
-      message: "Usuario creado correctamente",
+      message: "User create successfully",
     });
   } catch (error) {
-    return sendErrorResponse(res, 500, "Algo salió mal", error);
+    return sendErrorResponse(res, 500, "Something went wrong", error);
   }
 };
 
@@ -42,7 +42,7 @@ authController.login = async (req, res) => {
       return sendErrorResponse(
         res,
         400,
-        "Debe completar los campos requeridos correctamente"
+        "You must fill in the required fields correctly"
       );
     }
     try {
@@ -50,11 +50,11 @@ authController.login = async (req, res) => {
         model: Role,
       }] });
       if (!user) {
-        return sendErrorResponse(res, 404, "Email no existente");
+        return sendErrorResponse(res, 404, "Email doesen't exist");
       }
       const isValidPassword = compareHash(password, user.password);
       if (!isValidPassword) {
-        return sendErrorResponse(res, 401, "Contraseña incorrecta");
+        return sendErrorResponse(res, 401, "Incorrected password");
       }
       const token = generateToken({
         user_id: user.id,
@@ -63,12 +63,12 @@ authController.login = async (req, res) => {
       });
       
       sendSuccsessResponse(res, 200, {
-        message: "Inicio de sesión de usuario exitoso",
+        message: "User login successful",
         token: token,
         role: user.Role.user_role,
       });
     } catch (error) {
-      sendErrorResponse(res, 500, "Inicio de sesión de usuario fallido", error);
+      sendErrorResponse(res, 500, "User login failed", error);
     }
   };
 

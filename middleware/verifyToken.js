@@ -8,7 +8,6 @@ const verifyToken = (req, res, next) => {
     return sendErrorResponse(res, 401, "No se encontró ningún token de autorización");
   }
   try {
-    //se decodifica el token y se extraen los valores de id y rol del usuario
     const decoded = decodedToken(token);
     req.user_id = decoded.user_id;
     req.user_role = decoded.user_role;
