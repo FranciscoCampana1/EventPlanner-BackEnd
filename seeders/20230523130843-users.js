@@ -1,4 +1,5 @@
 "use strict";
+const {hash} = require("../_util/hash");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
           name: "John",
           surname:"Doe",
           email:"jhon@gmail.com",
-          password:"12345678",
+          password:hash("12345678"),
           role_id: 1,
           createdAt:new Date(),
           updatedAt:new Date()
@@ -19,7 +20,7 @@ module.exports = {
           name: "Francisco",
           surname:"Campana",
           email:"francisco@gmail.com",
-          password:"12345678",
+          password:hash("12345678"),
           role_id: 2,
           createdAt:new Date(),
           updatedAt:new Date()
@@ -28,7 +29,7 @@ module.exports = {
           name: "Sebastian",
           surname:"Marchin",
           email:"sebastian@gmail.com",
-          password:"12345678",
+          password:hash("12345678"),
           role_id: 1,
           createdAt:new Date(),
           updatedAt:new Date()
