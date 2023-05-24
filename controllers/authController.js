@@ -1,5 +1,5 @@
 const authController = {};
-const { User} = require("../models");
+const { User, Role} = require("../models");
 const bcrypt = require("bcrypt");
 const {
   sendSuccsessResponse,
