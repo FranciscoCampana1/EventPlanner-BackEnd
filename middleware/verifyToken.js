@@ -5,7 +5,7 @@ const { sendErrorResponse } = require("../_util/sendResponse");
 const verifyToken = (req, res, next) => {
   const token = getTokenFromHeader(req.headers);
   if (!token) {
-    return sendErrorResponse(res, 401, "No se encontró ningún token de autorización");
+    return sendErrorResponse(res, 401, "No authorization token found");
   }
   try {
     const decoded = decodedToken(token);
@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
     req.user_role = decoded.user_role;
     next();
   } catch (error) {
-    sendErrorResponse(res, 400, "Token invalido", error);
+    sendErrorResponse(res, 400, "Invalid Token", error);
   }
 };
 module.exports = verifyToken;
