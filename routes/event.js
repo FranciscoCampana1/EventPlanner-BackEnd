@@ -10,6 +10,6 @@ router.get("/get-events", verifyToken, eventController.getById);
 
 router.put("/update-event/:id", verifyToken, eventController.updateEvent);
 
-router.delete('/delete-event', verifyToken, eventController.deleteEvent)
+router.delete('/delete-event/:id', verifyToken, eventController.deleteEvent)
 
 module.exports = router;
