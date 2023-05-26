@@ -25,8 +25,8 @@ eventController.createEvent = async (req, res) => {
       user_id: userAdmin.id,
       event_id: newEvent.id,
       createdAt: new Date(),
-      updatedAt: new Date()
-    })
+      updatedAt: new Date(),
+    });
 
     return sendSuccsessResponse(res, 200, {
       message: "Event created succesfully",
@@ -38,21 +38,29 @@ eventController.createEvent = async (req, res) => {
 };
 
 eventController.getById = async (req, res) => {
-  try { 
+  try {
     const event = await User_event.findAll({
-      where: { user_id: req.user_id},
+      where: { user_id: req.user_id },
       attributes: { exclude: ["createdAt", "updatedAt"] },
       include: {
         model: Event,
         attributes: {
-          exclude: ["createdAt", "updatedAt"]
-        }, include: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: {
           model: User,
-          attributes:{
-            exclude: ["id","email", "password", "role_id", "createdAt", "updatedAt"]
-          }
-        }
-      }
+          attributes: {
+            exclude: [
+              "id",
+              "email",
+              "password",
+              "role_id",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+        },
+      },
     });
 
     if (event == 0) {
@@ -96,11 +104,38 @@ eventController.updateEvent = async (req, res) => {
   }
 };
 
+eventController.deleteEvent = async (req, res) => {
+  try {
+    const event_id = req.params.id;
+
+    const event = await Event.findOne({
+      where: { id: event_id },
+    });
+    if (event.id_admin == req.user_id) {
+      await User_event.destroy({
+        where: { event_id: event_id },
+      });
+      const deleteEvent = await Event.destroy({
+        where: { id: event_id, id_admin: req.user_id },
+      });
+      if (deleteEvent) {
+        return sendSuccsessResponse(res, 200, {
+          message: "Delete event successfully",
+        });
+      }
+    }else{
+      return sendErrorResponse(
+        res,
+        404,
+        "To delete an event you must correctly complete the required fields"
+      );
+    }
+  } catch (error) {
+    return sendErrorResponse(res, 500, "Can't delete event", error);
+  }
+};
 
 
-eventController.deleteEvent = async (req, res) =>{
-  //la funcion para eliminar el evento
-}
 
 
 
