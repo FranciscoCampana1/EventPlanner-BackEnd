@@ -135,6 +135,35 @@ eventController.deleteEvent = async (req, res) => {
   }
 };
 
+eventController.deleteInvitation = async (req, res) => {
+  try {
+    const event_id = req.params.id;
+
+    const event = await Event.findOne({
+      where: { id: event_id },
+    });
+    if (event) {
+     const deleteEvent = await User_event.destroy({
+        where: { user_id: req.user_id, event_id: event_id },
+      });
+      
+      if (deleteEvent == 1) {
+        return sendSuccsessResponse(res, 200, {
+          message: "Delete invitation successfully",
+        });
+      }
+    }else{
+      return sendErrorResponse(
+        res,
+        404,
+        "To delete an invitation you must correctly complete the required fields"
+      );
+    }
+  } catch (error) {
+    return sendErrorResponse(res, 500, "Can't delete invitation", error);
+  }
+};
+
 
 
 
