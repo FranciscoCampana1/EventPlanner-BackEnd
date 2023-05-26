@@ -1,5 +1,5 @@
 const authController = {};
-const { User, Role} = require("../models");
+const { User, Role, Contact} = require("../models");
 const bcrypt = require("bcrypt");
 const {
   sendSuccsessResponse,
@@ -16,6 +16,7 @@ authController.register = async (req, res) => {
       surname,
       email,
       password,
+      phone,
     } = req.body;
 
     const encryptedPassword = bcrypt.hashSync(password, 10);
@@ -28,8 +29,13 @@ authController.register = async (req, res) => {
       role_id: 1,
     });
 
+    const newContact = await Contact.create({
+      user_id: newUser.id,
+      phone: phone
+    })
+
     return sendSuccsessResponse(res, 200, {
-      message: "User create successfully",
+      message: "User create successfully"
     });
   } catch (error) {
     return sendErrorResponse(res, 500, "Something went wrong", error);
