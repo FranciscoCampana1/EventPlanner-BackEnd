@@ -7,19 +7,16 @@ module.exports = {
       "contacts",
       [
         {
-          phone: "692556685",
           user_id: 1,
           createdAt:new Date(),
           updatedAt:new Date()
         },
         {
-          phone: "74825685",
           user_id: 2,
           createdAt:new Date(),
           updatedAt:new Date()
         },
         {
-          phone: "12345685",
           user_id: 3,
           createdAt:new Date(),
           updatedAt:new Date()

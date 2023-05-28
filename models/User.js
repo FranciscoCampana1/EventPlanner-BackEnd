@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Contact, {
         foreignKey: "user_id"
       })
+
+      User.belongsToMany(models.Contact, {
+        through: "diarys",
+        foreignKey: "user_id"
+      })
       
       User.belongsTo(models.Role, {
         foreignKey: "role_id"
@@ -53,6 +58,12 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           min: 8,
         },
+      },
+      phone:{
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 8,
+        }
       },
       role_id: {
         type: DataTypes.INTEGER,

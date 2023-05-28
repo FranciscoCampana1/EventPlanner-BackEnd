@@ -10,18 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       Contact.belongsTo(models.User, {
         foreignKey:"user_id"
       })
+
+      Contact.belongsToMany(models.User, {
+        through: "diarys",
+        foreignKey: "contact_id"
+      })
+
     }
   }
 
   Contact.init({
-    phone:{
-      type: DataTypes.INTEGER,
-      validate: {
-        min: 8,
-        max:15,
-        unique: true
-      }
-    },
     user_id:{
       type: DataTypes.INTEGER,
     }

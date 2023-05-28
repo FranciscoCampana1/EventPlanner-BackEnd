@@ -25,7 +25,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
+      phone: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       role_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

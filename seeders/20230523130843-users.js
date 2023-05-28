@@ -12,6 +12,7 @@ module.exports = {
           surname:"Doe",
           email:"jhon@gmail.com",
           password:hash("12345678"),
+          phone: "12345685",
           role_id: 1,
           createdAt:new Date(),
           updatedAt:new Date()
@@ -21,6 +22,7 @@ module.exports = {
           surname:"Campana",
           email:"francisco@gmail.com",
           password:hash("12345678"),
+          phone: "55854754",
           role_id: 2,
           createdAt:new Date(),
           updatedAt:new Date()
@@ -30,6 +32,7 @@ module.exports = {
           surname:"Marchin",
           email:"sebastian@gmail.com",
           password:hash("12345678"),
+          phone: "99998785",
           role_id: 1,
           createdAt:new Date(),
           updatedAt:new Date()
