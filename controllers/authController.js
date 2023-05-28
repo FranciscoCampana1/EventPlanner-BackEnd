@@ -26,12 +26,12 @@ authController.register = async (req, res) => {
       surname: surname,
       email: email,
       password: encryptedPassword,
+      phone: phone,
       role_id: 1,
     });
 
     const newContact = await Contact.create({
       user_id: newUser.id,
-      phone: phone
     })
 
     return sendSuccsessResponse(res, 200, {
