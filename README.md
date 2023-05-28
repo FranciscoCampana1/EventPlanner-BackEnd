@@ -1,4 +1,4 @@
-# backend
+# Event Planner BackEnd
 
 ## Table of Contents
 
