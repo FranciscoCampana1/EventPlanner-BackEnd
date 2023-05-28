@@ -5,6 +5,10 @@ var router = express.Router();
 const isAdmin = require('../middleware/isAdmin')
 
 /* GET users listing. */
-router.get('/get-all', verifyToken, isAdmin,userController.getAll)
+router.get('/get-all', verifyToken, isAdmin, userController.getAll)
+
+router.get('/get-my-contacts', verifyToken, userController.getMyContacts)
+
+router.get('/get-profile', verifyToken, userController.getProfile)
 
 module.exports = router;
