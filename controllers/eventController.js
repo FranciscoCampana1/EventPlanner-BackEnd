@@ -90,7 +90,6 @@ eventController.updateEvent = async (req, res) => {
     if (updateEvent == 1) {
       return sendSuccsessResponse(res, 200, {
         message: "Modified event successfully",
-        updateEvent,
       });
     } else {
       return sendErrorResponse(
