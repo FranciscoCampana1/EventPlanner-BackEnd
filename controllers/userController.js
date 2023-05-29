@@ -37,10 +37,10 @@ userController.getAll = async (req, res) => {
 userController.getProfile = async (req, res) =>{
   try {
     const {user_id} = req
-   const profile = await User.findOne({where : {id : user_id}, attributes: {exclude:["password","createdAt","updatedAt","role_id"]}})
+   const profile = await User.findOne({where : {id : user_id}, attributes: {exclude:["id", "password", "createdAt", "updatedAt", "role_id"]}})
    sendSuccsessResponse(res, 200, profile)
   } catch (error) {
-   sendErrorResponse(res, 404, "Id no existente", error)
+   sendErrorResponse(res, 404, "Id not found", error)
   }
  };
 
@@ -55,12 +55,12 @@ userController.getProfile = async (req, res) =>{
       include:{
         model: Contact,
         attributes:{
-          exclude: ["createdAt", "updatedAt",]
+          exclude: ["createdAt", "updatedAt","id", ]
         },
         include:{
           model:User,
           attributes:{
-            exclude: ["createdAt", "updatedAt","id","password"]
+            exclude: ["createdAt", "updatedAt","id","password", "role_id"]
           }
         }
       }
@@ -78,5 +78,28 @@ userController.getProfile = async (req, res) =>{
     return sendErrorResponse(res, 500, "Failed to retrive contacts", error);
   }
 };
+
+userController.createContact = async (req, res) => {
+  try {
+    const {phone} = req.body;
+  
+    const user = await User.findOne({
+      where: {phone: phone}
+    })
+  
+    const newDiaryContact = await Diary.create({
+      user_id: req.user_id,
+      contact_id: user.id
+    })
+  
+    return sendSuccsessResponse(res, 200, {
+      message: "Contact create successfully"
+    });
+  } catch (error) {
+    return sendErrorResponse(res, 500, "Something went wrong", error);
+  }
+};
+
+
 
 module.exports = userController;

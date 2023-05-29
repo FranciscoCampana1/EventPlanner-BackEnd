@@ -11,4 +11,7 @@ router.get('/get-my-contacts', verifyToken, userController.getMyContacts)
 
 router.get('/get-profile', verifyToken, userController.getProfile)
 
+router.post('/create-contact', verifyToken, userController.createContact)
+
+
 module.exports = router;

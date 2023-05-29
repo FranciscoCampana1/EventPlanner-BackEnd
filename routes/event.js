@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET users listing. */
 router.post("/create", verifyToken, eventController.createEvent);
 
-router.get("/get-events", verifyToken, eventController.getById);
+router.get("/get-events", verifyToken, eventController.getEvents);
 
 router.put("/update-event/:id", verifyToken, eventController.updateEvent);
 
@@ -16,7 +16,10 @@ router.delete(
   "/delete-invitation/:id",
   verifyToken,
   eventController.deleteInvitation
-);
+  );
+  
+  
+router.post("/add-guests/:id", verifyToken, eventController.addContacts);
 
 
 
