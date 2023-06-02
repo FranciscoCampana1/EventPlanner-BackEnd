@@ -9,7 +9,7 @@ const {
 //CONTROLADOR PARA VER TODOS LOS USUARIOS REGISTRADOS (SOLO SI ES ADMIN PUEDE VER LOS PACIENTES)
 userController.getAll = async (req, res) => {
   let { page } = req.query;
-  LIMIT = 6;
+  LIMIT = 4;
   try {
     const count = await User.count();
     const pages = getPagesFromCountLimit(count, LIMIT);
